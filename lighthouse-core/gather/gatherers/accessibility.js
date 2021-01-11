@@ -7,7 +7,7 @@
 
 /* global window, document, getNodeDetails */
 
-const Gatherer = require('./gatherer.js');
+const Gatherer = require('../../fraggle-rock/gather/base-gatherer.js');
 const axeLibSource = require('../../lib/axe.js').source;
 const pageFunctions = require('../../lib/page-functions.js');
 
@@ -99,14 +99,20 @@ async function runA11yChecks() {
 /* c8 ignore stop */
 
 /**
+ * @implements {LH.Gatherer.GathererInstance}
  * @implements {LH.Gatherer.FRGathererInstance}
  */
 class Accessibility extends Gatherer {
+  /** @type {LH.Gatherer.GathererMeta} */
+  meta = {
+    supportedModes: ['snapshot', 'navigation'],
+  }
+
   /**
    * @param {LH.Gatherer.FRTransitionalContext} passContext
    * @return {Promise<LH.Artifacts.Accessibility>}
    */
-  afterPass(passContext) {
+  snapshot(passContext) {
     const driver = passContext.driver;
 
     return driver.evaluate(runA11yChecks, {
