@@ -42,9 +42,8 @@ async function snapshot(options) {
       /** @type {Partial<LH.GathererArtifacts>} */
       const artifacts = {};
 
-      for (const {gatherer} of config.artifacts || []) {
-        /** @type {keyof LH.GathererArtifacts} */
-        const artifactName = gatherer.instance.name;
+      for (const {id, gatherer} of config.artifacts || []) {
+        const artifactName = /** @type {keyof LH.GathererArtifacts} */ (id);
         const artifact = await Promise.resolve()
           .then(() => gatherer.instance.snapshot({gatherMode: 'snapshot', driver}))
           .catch(err => err);
