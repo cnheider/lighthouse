@@ -6,6 +6,7 @@
 'use strict';
 
 /**
+ * Filters an array of artifacts down to the set that supports the specified gather mode.
  *
  * @param {LH.Config.FRConfig['artifacts']} artifacts
  * @param {LH.Gatherer.GatherMode} mode
@@ -19,6 +20,7 @@ function filterArtifactsByGatherMode(artifacts, mode) {
 }
 
 /**
+ * Filters an array of audits down to the set that can be computed using only the specified artifacts.
  *
  * @param {LH.Config.FRConfig['audits']} audits
  * @param {Array<LH.Config.ArtifactDefn>} availableArtifacts
@@ -35,6 +37,9 @@ function filterAuditsByAvailableArtifacts(audits, availableArtifacts) {
 }
 
 /**
+ * Filters a categories object and their auditRefs down to the set that can be computed using
+ * only the specified audits.
+ *
  * @param {LH.Config.Config['categories']} categories
  * @param {Array<LH.Config.AuditDefn>} availableAudits
  * @return {LH.Config.Config['categories']}
@@ -56,6 +61,8 @@ function filterCategoriesByAvailableAudits(categories, availableAudits) {
 }
 
 /**
+ * Filters a config's artifacts, audits, and categories down to the set that supports the specified gather mode.
+ *
  * @param {LH.Config.FRConfig} config
  * @param {LH.Gatherer.GatherMode} mode
  * @return {LH.Config.FRConfig}
